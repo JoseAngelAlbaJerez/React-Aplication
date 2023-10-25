@@ -1,0 +1,42 @@
+import React from "react";
+import { Link, useLocation } from "react-router-native";
+import { StyleSheet } from "react-native";
+import theme from "../../../theme";
+import Constants from 'expo-constants'
+import StyledText from "../../atoms/StyledText/StyledText";
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: theme.appBar.primary,
+        flexDirection: 'row',
+        paddingTop: Constants.statusBarHeight + 30,
+    },
+    text: {
+        color: theme.appBar.textSecondary,
+        paddingHorizontal: 10,
+    },
+    active:{
+        color: theme.appBar.textPrimary
+    }
+ 
+});
+
+const AppBarTab = ({ children, to }) => {
+    const { pathname } = useLocation();
+    const active = pathname === to;
+    const textStyles = [
+        styles.text,
+        active && styles.active
+    ];
+
+    return (
+        
+        <Link to={to} >
+            <StyledText fontWeight={'bold'} style={textStyles}>
+                {children}
+            </StyledText>
+        </Link>
+    )
+}
+
+export default AppBarTab;
